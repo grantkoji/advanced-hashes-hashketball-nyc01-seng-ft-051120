@@ -161,6 +161,7 @@ def team_names
   game_hash.each do |home_away, team_info|
     team_array << team_info[:team_name]
   end
+  team_array
 end
 
 def player_numbers(name_team)
