@@ -129,95 +129,41 @@ def game_hash
 end
 
 def num_points_scored(name)
-  i = 0
-  while i < game_hash[:home][:players].length do
-    if name == game_hash[:home][:players][i][:player_name]
-      return game_hash[:home][:players][i][:points]
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player_info|
+      if player_info[:player_name] == name
+        return player_info[:points]
+      end
     end
-    i += 1
-  end
-  count = 0
-  while count < game_hash[:away][:players].length do
-    if name == game_hash[:away][:players][count][:player_name]
-      return game_hash[:away][:players][count][:points]
-    end
-    count += 1
   end
 end
 
 def shoe_size(name)
-  game_hash[:home][:players].each do |value|
-    if name == value[:player_name]
-      return value[:shoe]
-    end
-  end
-  game_hash[:away][:players].each do |value|
-    if name == value[:player_name]
-      return value[:shoe]
+  game_hash.each do |team, team_info|
+    team_info[:players].each do |player_info|
+      if player_info[:player_name] == name
+        return player_info[:shoe]
+      end
     end
   end
 end
 
 def team_colors(team_name)
-  game_hash.each do |key, value|
-    if team_name == value[:team_name]
-      return value[:colors]
-    end
-  end
+  
 end
 
 def team_names
-  array_teams = []
-  game_hash.each do |key, value|
-    array_teams << value[:team_name]
-  end
-  array_teams
+
 end
 
 def player_numbers(team_name)
-  array_jerseys = []
-  game_hash.each do |key, value|
-    if team_name == value[:team_name]
-      i = 0
-      while i < game_hash[key][:players].length do
-        array_jerseys << game_hash[key][:players][i][:number]
-        i += 1
-      end
-    end
-  end
-  array_jerseys
+
 end
 
 def player_stats(name)
-  player_hash = {}
-  game_hash.each do |key, value|
-    i = 0
-      while i < value[:players].length do
-        if name == value[:players][i][:player_name]
-          value[:players][i].each do |innerkeys, innervalues|
-            player_hash[innerkeys] = innervalues
-          end
-        end
-        i += 1
-      end
-  end
-  player_hash
+
 end
 
 def big_shoe_rebounds
-  player_w_largest_shoe = "no one"
-  player_rebounds = nil
-  player_shoe_size = 0
-  game_hash.each do |key, value|
-    i = 0
-    while i < value[:players].length do
-      if value[:players][i][:shoe] > player_shoe_size
-        player_shoe_size = value[:players][i][:shoe]
-        player_w_largest_shoe = value[:players][i][:player_name]
-        player_rebounds = value[:players][i][:rebounds]
-      end
-      i += 1
-    end
-  end
-  player_rebounds
+  
 end
