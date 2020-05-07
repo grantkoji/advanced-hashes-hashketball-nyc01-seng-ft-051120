@@ -157,17 +157,44 @@ def team_colors(team_name)
 end
 
 def team_names
-
+  team_array = []
+  game_hash.each do |home_away, team_info|
+    team_array << team_info[:team_name]
+  end
 end
 
-def player_numbers(team_name)
-
+def player_numbers(name_team)
+  array_number = []
+    game_hash.each do |home_away, team_info|
+      if team_info[:team_name] == name_team
+        team_info[:players].each do |player_info|
+          array_number << player_info[:number]
+        end
+      end
+    end
+  array_number
 end
 
 def player_stats(name)
-
+  game_hash.each do |home_away, team_info|
+    team_info[:players].each do |player_info|
+      if player_info[:player_name] == name
+        return player_info
+      end
+    end
+  end
 end
 
 def big_shoe_rebounds
-
+  largest_shoe_size = 0
+  rebounds_large_shoe = 0
+  game_hash.each do |home_away, team_info|
+    team_info[:players].each do |player_info|
+      if player_info[:shoe] > largest_shoe_size
+        largest_shoe_size = player_info[:shoe]
+        rebounds_large_shoe = player_info[:rebounds]
+      end
+    end
+  end
+  rebounds_large_shoe
 end
